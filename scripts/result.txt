@@ -1,0 +1,1 @@
+Locale	Core string	old loc string	new loc string	mock id
