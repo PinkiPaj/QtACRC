@@ -29,13 +29,12 @@ def main(text):
     for i in ar3:
         if i not in n2:
             n2.append(i)
-    print(n2)
     for i in range(len(n2)):
         ar2=[]
         for x in range(len(ar)):
             count += 1
             if count > 3 and count < 5 and n2[i] == ar[x-1]+ar[x]+ar[x+1]:
-                ar2.append(ar[x+3])
+                ar2.append((ar[x+3])[7:])
             if count == 7:
                 count = 0
         c = n[i]+', '.join(ar2)
@@ -51,3 +50,4 @@ def main(text):
         worksheet.write(row, col + 4, column5)
         row += 1
     workbook.close()
+    return True
