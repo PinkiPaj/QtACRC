@@ -14,21 +14,21 @@ def main(width,height,plase):
         for i in range(len(tree)):
             for x in range(len(tree[i][2])):
                 if len(tree[i][2]) != 0 and i != 0 and tree[i][2][x] == 'Thumbs.db':
+                    tree[i][2][x] = 'None'
                     if x != 0:
-                        tree[i][2].pop(x)
+                        tree[i][2][x] = 'None'
                     else:
-                        tree[i][2].pop(x)
+                        tree[i][2][x] = 'None'
                         break
             for x in tree[i][2]:
-                print(tree[i][0] + '/' + x)
-                img = Image.open(tree[i][0] + '/' + x)
-                print(img)
-                # ширина,  высота
-                # width,   height
-                img = img.resize((int(per1), int(per2)))
-                if x[-4:] == ".PNG":
-                    img.save(f'correktIMG\\{(plase.split("/"))[-1]}\\{(tree[i][0]).split("\\")[1]}\\{x}')
+                if x != 'None':
+                    img = Image.open(tree[i][0] + '/' + x)
+                    # ширина,  высота
+                    # width,   height
+                    img = img.resize((int(per1), int(per2)))
+                    if x[-4:] == ".PNG":
+                        img.save(f'correktIMG\\{(plase.split("/"))[-1]}\\{(tree[i][0]).split("\\")[1]}\\{x}')
 
-                else:
-                    img.save(f'correktIMG\\{(plase.split("/"))[-1]}\\{(tree[i][0]).split("\\")[1]}\\{x[:x.find(".")]}.PNG')
+                    else:
+                        img.save(f'correktIMG\\{(plase.split("/"))[-1]}\\{(tree[i][0]).split("\\")[1]}\\{x[:x.find(".")]}.PNG')
     return True
