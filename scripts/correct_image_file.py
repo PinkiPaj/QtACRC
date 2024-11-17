@@ -1,34 +1,23 @@
 from PIL import Image
 import os
 
-def main(width,height,plase):
+
+def main(width, height, plase):
     tree = list(os.walk(plase))
-    per1=width
-    per2=height
     # запись изменённых файлов
     # recording changed files
-    if len(tree) != 1:
-        os.mkdir(f'correktIMG\\{(plase.split("/"))[-1]}')
-        for i in range(len(tree) - 1):
-            os.mkdir(f'correktIMG\\{(plase.split("/"))[-1]}\\{(tree[i + 1][0]).split("\\")[1]}')
-        for i in range(len(tree)):
-            for x in range(len(tree[i][2])):
-                if len(tree[i][2]) != 0 and i != 0 and tree[i][2][x] == 'Thumbs.db':
-                    tree[i][2][x] = 'None'
-                    if x != 0:
-                        tree[i][2][x] = 'None'
-                    else:
-                        tree[i][2][x] = 'None'
-                        break
-            for x in tree[i][2]:
-                if x != 'None':
-                    img = Image.open(tree[i][0] + '/' + x)
-                    # ширина,  высота
-                    # width,   height
-                    img = img.resize((int(per1), int(per2)))
+    for i in tree:
+        if i[1]:
+            os.mkdir(f'correktIMG\\{(plase.split("/"))[-1]}')
+            for x in i[1]:
+                os.mkdir(f'correktIMG\\{(plase.split("/"))[-1]}\\{x}')
+        if i[2]:
+            for x in i[2]:
+                if x != "Thumbs.db":
+                    img = Image.open(i[0] + '\\' + x)
+                    img = img.resize((int(width), int(height)))
                     if x[-4:] == ".PNG":
-                        img.save(f'correktIMG\\{(plase.split("/"))[-1]}\\{(tree[i][0]).split("\\")[1]}\\{x}')
-
+                        img.save(f'correktIMG\\{(i[0].split("/"))[-1]}\\{x}')
                     else:
-                        img.save(f'correktIMG\\{(plase.split("/"))[-1]}\\{(tree[i][0]).split("\\")[1]}\\{x[:x.find(".")]}.PNG')
+                        img.save(f'correktIMG\\{(i[0].split("/"))[-1]}\\{x[:x.find(".")]}.PNG')
     return True

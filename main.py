@@ -1,6 +1,16 @@
+import os
 import sys
 from PyQt6.QtWidgets import *
 from win import secondWindow
+import os
+
+tree = list(os.listdir())
+if "OPAL" and "correktIMG" in tree:
+    print("ok")
+else:
+    os.mkdir("OPAL")
+    os.mkdir("correktIMG")
+
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -9,9 +19,8 @@ class MainWindow(QMainWindow):
         self.win_sec_exel_clicked = secondWindow.SecondWindowExel()
         self.win_sec_img_file_clicked = secondWindow.SecondWindowImg()
 
-        self.btn = QPushButton('OPAL exel',self)
+        self.btn = QPushButton('OPAL exel', self)
         self.btn.clicked.connect(self.evt_opal_exel_clicked)
-
 
         self.btn2 = QPushButton('Convert img file', self)
         self.btn2.move(0, 50)
@@ -24,9 +33,8 @@ class MainWindow(QMainWindow):
         self.win_sec_img_file_clicked.show()
 
 
-
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    dlgMain = MainWindow()#create main GUI window
-    dlgMain.show()#show GUI
+    dlgMain = MainWindow()  # create main GUI window
+    dlgMain.show()  # show GUI
     sys.exit(app.exec())
