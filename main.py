@@ -5,11 +5,11 @@ from win import secondWindow
 import os
 
 tree = list(os.listdir())
-if "OPAL" and "correktIMG" in tree:
-    print("ok")
-else:
-    os.mkdir("OPAL")
+
+if "correktIMG" not in tree:
     os.mkdir("correktIMG")
+if "OPAL" not in tree:
+    os.mkdir("OPAL")
 
 
 class MainWindow(QMainWindow):
